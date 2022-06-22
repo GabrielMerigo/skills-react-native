@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { NewCard } from '../components/NewCard'
+import { Button } from '../components/Button'
 
 
 export function Home(){
@@ -20,20 +22,15 @@ export function Home(){
           placeholder="New Skill" 
           placeholderTextColor="#555" 
         />
-        <TouchableOpacity onPress={handleAddNewSkill} style={styles.button}>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
+
+        <Button handleAddNewSkill={handleAddNewSkill} />
 
         <Text style={[styles.title, { marginVertical: 20, marginTop: 20 }]}>
           My Skills
         </Text>
   
         {skills.map((skill) => (
-          <TouchableOpacity key={skill} style={styles.buttonSkill}>
-            <Text style={styles.textSkill}>
-              {skill}
-            </Text>
-          </TouchableOpacity>
+          NewCard(skill)
         ))}
       </View>
     </View>
@@ -77,17 +74,5 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     padding: 5
-  },
-  textSkill: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  buttonSkill: {
-    padding: 15,
-    borderRadius: 50,
-    backgroundColor: '#1F1E25',
-    alignItems: 'center',
-    marginTop: 10
   }
 })
