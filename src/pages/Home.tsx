@@ -8,21 +8,21 @@ type SkillData = {
   name: string;
 }
 
-export function Home(){
+export function Home() {
   const [newSkill, setNewSkill] = useState('');
   const [skills, setSkills] = useState<SkillData[]>([]);
   const [greeting, setGreeting] = useState('');
 
-  function handleAddSkill(){
+  function handleAddSkill() {
     const data = {
       id: String(new Date().getTime()),
       name: newSkill
     }
 
-    setSkills(oldState  => [...oldState, data]);
+    setSkills(oldState => [...oldState, data]);
   }
 
-  function handleRemoveSkill(id: string){
+  function handleRemoveSkill(id: string) {
     setSkills(skills.filter(skill => skill.id !== id));
   }
 
@@ -30,35 +30,38 @@ export function Home(){
   useEffect(() => {
     const currentHour = new Date().getHours();
 
-    if(currentHour < 12){
+    if (currentHour < 12) {
       setGreeting('Good Morning')
-    }else if(currentHour >= 12 && currentHour <= 18){
+    } else if (currentHour >= 12 && currentHour <= 18) {
       setGreeting('Good Afternoon')
-    }else{
+    } else {
       setGreeting('Good Night')
     }
   }, [])
 
-  return(
+  return (
     <View style={styles.container}>
       <View style={styles.space}>
         <Text style={styles.title}>Welcome, Gabriel</Text>
         <Text style={styles.greetins}>
-         {greeting}
+          {greeting}
         </Text>
-        <TextInput 
-          onChangeText={(e) => setNewSkill(e)} 
-          style={styles.input} 
-          placeholder="New Skill" 
-          placeholderTextColor="#555" 
+        <TextInput
+          testID="input-new"
+          onChangeText={(e) => setNewSkill(e)}
+          style={styles.input}
+          placeholder="New Skill"
+          placeholderTextColor="#555"
         />
 
-        <Button title="Add" onPress={handleAddSkill} />
+        <Button testID="button-add" title="Add" onPress={handleAddSkill} />
         <Text style={[styles.title, { marginVertical: 20, marginTop: 20 }]}>
           My Skills
         </Text>
 
-        <FlatList 
+        <FlatList
+          testID="skills"
+          keyboardShouldPersistTaps="never"
           data={skills}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
