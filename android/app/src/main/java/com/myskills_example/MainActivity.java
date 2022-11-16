@@ -1,4 +1,4 @@
-package com.myskills;
+package com.myskills_example;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
